@@ -1,11 +1,10 @@
 # Alumni-management
-## using django framework
+Using django framework
 
 college database project
 
-snapshots
-![alt text](https://github.com/ajykumr/Alumni-management/blob/main/snapshots/Home-thumb.png)
 
+[snapshots are here!](https://github.com/ajykumr/Alumni-management/blob/main/snapshots)
 
 
 1. create staff group
