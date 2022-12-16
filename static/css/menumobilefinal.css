@@ -1,0 +1,135 @@
+/* final draft */
+/* mobile final 1.0 */
+/* after edit */
+@media only screen and (min-width:768px) and (max-width:1024px) {
+    .heroImgContainer {
+        max-height: 472px
+    }
+}
+
+#menutoggler {
+    display: none;
+    cursor: pointer;
+}
+
+/* new working ends here */
+@media only screen and (max-width:767px) {
+    root: {
+        1rem: 8px;
+    }
+
+    .heroImgContainer {
+        max-height: 272px
+    }
+
+    .menu-flex-container {
+        display: none;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+        padding: 1.5rem 2rem 1rem !important;
+    }
+
+    .menu-list-container {
+        width: 100%;
+        height: 0;
+    }
+
+    #menutoggler {
+        display: block;
+        position: absolute;
+        top: 1.5rem;
+        right: 2rem;
+        width: 2rem;
+        height: 2rem;
+        z-index: 120;
+        opacity: 0;
+    }
+
+    #menutoggler:checked~.menu-list-container {
+        margin-top: 1rem;
+        display: block !important;
+        height: 100%;
+        transition: all 0.4s ease;
+    }
+
+    #menutoggler:checked~.menu-list-container>.menu-flex-container {
+        display: block !important;
+    }
+
+    .menu-flex {
+        display: block;
+    }
+
+    .menu-links {
+        display: block;
+        width: 100%;
+        padding: 0.5rem !important;
+    }
+
+    .menu-links:hover {
+        background: #f4f4f4;
+    }
+
+    .menu-item {
+        margin: 0 !important;
+    }
+
+    .hamberger {
+        position: absolute;
+        top: 1.5rem;
+        right: 2rem;
+        width: 2rem;
+        height: 2rem;
+        padding: 0.1rem;
+        z-index: 110;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.4s ease;
+    }
+
+    .hamberger div {
+        position: relative;
+        height: 3px;
+        flex: none;
+        background: #000;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.4s ease;
+    }
+
+    .hamberger div::after,
+    .hamberger div::before {
+        content: '';
+        width: 100%;
+        background: #000;
+        position: absolute;
+        top: -10px;
+        height: 3px;
+    }
+
+    .hamberger div::after {
+        top: 10px;
+    }
+
+    #menutoggler:checked+.hamberger div {
+        transform: rotate(135deg);
+    }
+
+    #menutoggler:checked+.hamberger div::after, #menutoggler:checked+.hamberger div::before {
+        top: 0;
+        transform: rotate(90deg);
+    }
+
+    #menutoggler:checked:hover+.hamberger div {
+        transform: rotate(415deg);
+    }
+}

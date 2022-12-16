@@ -1,0 +1,93 @@
+{% extends 'appcore/headAndFoot.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<style media="screen">
+    .large-heading-inline {
+        font-size: 14rem;
+        font-weight: 900;
+        text-align: center;
+        line-height: 0.7;
+        margin-top: 3rem;
+    }
+
+    .hero-banner {
+        border: 0.01rem solid #e7e7e7;
+        padding: 3rem;
+        margin: 5rem auto;
+        font-size: 3rem;
+        font-weight: 900;
+        text-align: center;
+        margin-left: 15rem;
+        background: #55a55c;
+        color: #fff;
+        border-radius: 8px;
+    }
+
+    .less-large-heading-inline {
+        font-size: 3.4rem;
+    }
+    .btnhere{
+        margin-top:1.5rem;
+        border:1px solid #fff;
+        color:#fff;
+        background:#6ba770;
+    }
+    .btnhere:hover{
+        background:#9cd3a1;
+    }
+
+
+    /* @media only screen and (max-width:767px) {
+    .large-heading-inline {
+    }
+
+    .less-large-heading-inline {
+    }
+} */
+
+    @media only screen and (max-width:767px) {
+        .large-heading-inline {
+            font-size: 7rem;
+            margin-top: 7rem;
+
+        }
+
+        .less-large-heading-inline {
+            font-size: 2.3rem;
+            margin-top: 1.3rem
+        }
+    }
+
+    @media only screen and (max-width:530px) {
+        .large-heading-inline {
+            font-size: 5rem;
+        }
+
+        .less-large-heading-inline {
+            font-size: 1.3rem;
+        }
+    }
+</style>
+
+<div class="hero-container">
+    <div class="hero">
+        <div class="heroImgContainer">
+            <div class="welcometitle">WELCOME</div>
+            <!-- <img class="heroImage" src="{% static 'images/homepage_header_background_v2.svg' %}" alt=""> -->
+        </div>
+    </div>
+
+    <div>
+        <div class="hero-banner center">
+            <div class="less-large-heading-inline">Are You an Alumni</div>
+            <div class="less-large-heading-inline" style="font-size: 2.5rem;">of our college?</div>
+            <div>
+                <a class="button btnhere" href="{% url 'form' %}" >Register here</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

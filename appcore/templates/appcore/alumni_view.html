@@ -1,0 +1,74 @@
+{% extends 'appcore/dashbar.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="right-panel pad_left_right">
+    <div class="right_panel_card_edit_alum">
+<div class="editpage_header">
+View Alumni
+</div>
+  <div class="editpage_head">
+    {{alumni.usn}}
+  </div>
+  <div class="row-pro-pic-and-name">
+            <div class="row-pro-pic-and-name"> <div>
+               <img class="propic-mod" src="{{ alumni.profile_pic.url }}" alt="{{alumni.firstname}} photo">
+             </div>
+             <div class="detail-modal">
+               <div>NAME : <span id="span-id-full-name">{{alumni.firstname}} {{alumni.lastname}}</span></div>
+               <div>PHONE # : <span id="span-id-phone">{{alumni.phone}}</span> </div>
+               <div>EMAIL : <a href="mailto:{{alumni.email}}"><span id="span-id-email">{{alumni.email}}</span></a><p></p>  </div>
+               <div>GENDER : <span id="span-id-gender">{{alumni.gender}}</span> </div>
+               <div>DOB : <span id="span-id-dob">{{alumni.birthdate}}</span></div>
+               <div>PASSING YEAR : <span id="span-id-passing-year">{{alumni.pass_year}}</span> </div>
+               <div>BRANCH : <span id="span-id-dob">{{alumni.branch}}</span></div>
+               {% for employer in employers %}
+                {% if  forloop.counter0 == 0 %}
+                <div class="new-line-bottom">PRESENT EMPLOYEMENT</div>
+                <div>PRESENT EMPLOYER: <span id="span-id-present-company">{{employer.Employer_name}}</span></div>
+                <div>PRESENT DESIGNATION : <span id="span-id-dob">{{employer.Employer_Designation}}</span></div>
+                <div>JOINING YEAR : <span id="span-id-dob">{{employer.Employer_join_year}}</span></div>
+                {% else %}
+                <div class="new-line-bottom">PREVIOUS EMPLOYEMENT #{{forloop.counter0}} </div>
+                <div>PREVIOUS EMPLOYER: <span id="span-id-present-company">{{employer.Employer_name}}</span></div>
+                <div>PREVIOUS DESIGNATION : <span id="span-id-dob">{{employer.Employer_Designation}}</span></div>
+                <div>JOINING YEAR : <span id="span-id-dob">{{employer.Employer_join_year}}</span></div>
+                {% endif %}
+
+
+
+                {% empty %}
+
+                {% endfor %}
+
+             </div>  </div>
+
+
+
+
+           <div class="fx-crev">
+             <div>
+               <div>Status : <span class="font-weight">{{alumni.status}}</span></div>
+               <div class="fx-crev-item">
+                 <a href="{% url 'update_alumni' alumni.usn %}" class="button">Delete</a>
+                 <a href="{% url 'update_alumni' alumni.usn %}" class="button">Update</a>
+               </div>
+             </div>
+           </div>
+          </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

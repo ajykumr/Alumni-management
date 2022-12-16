@@ -1,0 +1,20 @@
+{% extends 'appcore/dashbar.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<table class="table">
+    <tr>
+        <th>Book</th>
+        <th>Author</th>
+    </tr>
+{% for book in Alumnis %}
+    <tr>
+        <td>{{book.usn}}</td>
+        <td>{{book.get_authors}}</td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}

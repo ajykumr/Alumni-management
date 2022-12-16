@@ -1,0 +1,64 @@
+{% extends 'appcore/headAndFoot.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="Actual-content center">
+    <!-- forms starts -->
+    <div class="formcontainer">
+        <div class="formcontainer">
+            <form class="" method="post">
+                {% csrf_token %}
+                <div class="formheading heading">Create Staff Account</div>
+                <div class="df margin-down">
+                    <label for="uname">Staff Name</label>
+                    {{ form.first_name }}
+                </div>
+                <div class="margin-down">
+                    <div class="df margin-down">
+                        <label for="uname">User Name</label>
+                        {{ form.username }}
+                    </div>
+                    <div class="df margin-down">
+                        <label for="uname">Email</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="margin-down">
+                        <label for="password">create new password</label>
+                        {{ form.password1 }}
+                        <div>
+                            <p class="punchline margin-down">Your password must contain at least 8 characters includes letters, numbers, characters</p>
+                        </div>
+                    </div>
+                    <div class="margin-down">
+                        <label for="password">Password confirmation:</label>
+                        {{ form.password2 }}
+                    </div>
+                    <div class="margin-down">
+                        {{form.errors}}
+                    </div>
+                </div>
+                <div class="left-float">
+                    <input type="submit" class="button" value="Create">
+                </div>
+                <div class="margin-down">
+                    <p class="punchline">already have an account? <a class="underline blue" href="{% url 'login' %}">login</a></p>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <!-- forms ends -->
+</div>
+
+<script type="text/javascript">
+    document.getElementById("id_first_name").placeholder = "Staff name";
+    document.getElementById("id_first_name").required = true;
+    document.getElementById("id_email").required = true;
+    document.getElementById("id_username").placeholder = "Username";
+    document.getElementById("id_email").placeholder = "Email";
+    document.getElementById("id_password1").placeholder = "New password";
+    document.getElementById("id_password2").placeholder = "Type new password again";
+</script>
+{% endblock %}

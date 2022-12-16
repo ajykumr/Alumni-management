@@ -1,0 +1,65 @@
+{% extends 'appcore/headAndFoot.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="hero-container">
+  <div class="hero center">
+      <div class="large-heading-inline" >
+    Thank you
+      </div>
+      <div class="less-large-heading-inline">for you response</div>
+  </div>
+</div>         <!-- hero container -->
+
+<style media="screen">
+.large-heading-inline {
+font-size: 14rem;
+font-weight: 900;
+text-align: center;
+line-height: 0.7;
+margin-top: 3rem;
+}
+
+.less-large-heading-inline {
+font-size: 3rem;
+font-weight: 900;
+text-align: center;
+margin-left: 15rem;
+}
+
+/* @media only screen and (max-width:767px) {
+    .large-heading-inline {
+    }
+
+    .less-large-heading-inline {
+    }
+} */
+
+@media only screen and (max-width:767px) {
+    .large-heading-inline {
+        font-size:7rem;
+        margin-top: 7rem;
+
+    }
+
+    .less-large-heading-inline {
+        font-size: 2.3rem;
+        margin-top: 1.3rem
+    }
+}
+
+@media only screen and (max-width:530px) {
+    .large-heading-inline {
+        font-size: 5rem;
+    }
+
+    .less-large-heading-inline {
+        font-size: 1.3rem;
+    }
+}
+
+</style>
+
+{% endblock %}

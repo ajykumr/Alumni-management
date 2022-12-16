@@ -1,0 +1,32 @@
+{% extends 'appcore/dashbar.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="right-panel">
+    <div class="">
+        <div class="rp-navbar">
+            <div class="dash_stats_head">
+                Documentation
+            </div>
+            </div>
+        </div>
+
+        <div class="bg_white margin_top ">
+            <p>activating users</p>
+            <p>adding year and branch</p>
+            <p>check for new dates in edit pages due to server time ahead</p>
+        </div>
+</div><!-- ends -->
+
+<script type="text/javascript">
+    const highlight_menu = document.getElementById('dash_bar_list_documentation')
+            if (highlight_menu) {
+                highlight_menu.classList.add("lm-list-item-active")
+            }
+</script>
+
+
+</div>
+</div>
+{% endblock %}

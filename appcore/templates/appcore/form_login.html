@@ -1,0 +1,45 @@
+{% extends 'appcore/headAndFoot.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="Actual-content center">
+  <!-- forms starts -->
+  <div class="formcontainer">
+ <form class="" method="post">
+    {% csrf_token %}
+   <div class="formheading heading">LOGIN</div>
+<div class="margin-down">
+  <div class="df margin-down">
+    <label for="id_username">User Name</label>
+    <input type="text" name="username" maxlength="150" autofocus required id="id_username">
+  </div>
+  <div>
+    <label for="id_password">Last Name</label>
+    <input type="password" name="password" autocomplete="password" required id="id_password">
+  </div>
+</div>
+<div>
+  <p class="punchline">Forgot password? Please contact admin</p>
+</div>
+<div class="margin-down">
+    <p class="punchline">don't have an account? <a class="underline blue" href="{% url 'signin' %}">Sign in</a></p>
+</div>
+<div >
+    {% for message in messages %}
+        <p class="error-message">{{message}}</p>
+    {% endfor %}
+</div>
+
+   <div class="left-float">
+       <input type="submit" class="button" name="submit" value="Login">
+   </div>
+
+ </form>
+  </div>
+  <!-- forms ends -->
+</div>
+
+{% endblock %}

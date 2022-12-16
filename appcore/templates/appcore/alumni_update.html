@@ -1,0 +1,140 @@
+{% extends 'appcore/dashbar.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="right-panel pad_left_right">
+  <div class="right_panel_card_edit_alum">
+
+    <div class="editpage_header">
+      Update Alumni
+    </div>
+    <label>University Registration Number</label>
+    <div class="editpage_head">
+      {{alumni}}
+    </div>
+    <div class="row-pro-pic-and-name_dummy">
+        <form method="post" class="remove_form_style" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.staff }}
+              <div class="margin-down">
+                <label for="id_profile_pic">
+                    <span id="labelImage"></span>
+                </label>
+              </div>
+              <div class="margin-down">
+                  {{ form.usn }}
+
+              </div>
+           <div class="divide two margin-down">
+             <div class="df">
+               <label for="id_firstname">First Name</label>
+               {{ form.firstname }}
+             </div>
+             <div>
+               <label for="id_lastname">Last Name</label>
+               {{ form.lastname }}
+             </div>
+           </div>
+           <div class="divide two margin-down">
+             <div class="df">
+               <label for="id_phone">Phone</label>
+               {{ form.phone }}
+             </div>
+             <div>
+               <label for="id_email">Email</label>
+                {{ form.email }}
+             </div>
+           </div>
+           <div class="margin-down">
+            <label for="id_profile_pic">Photo upload</label>
+            {{ form.profile_pic}}
+           </div>
+           <div class="divide three margin-down">
+             <div class="df">
+               <label for="id_gender">gender</label>
+                {{ form.gender }}
+             </div>
+             <div>
+               <label for="id_birthdate">Date of birth</label>
+                {{ form.birthdate }}
+             </div>
+             <div class="df">
+             <label class="rp-options-item" for="id_pass_year">Passing year</label>
+            {{ form.pass_year }}
+             </div>
+             <div class="df">
+               <label for="id_branch">Branch</label>
+                {{ form.branch }}
+             </div>
+           </div>
+              <div class="heading">Employement</div>
+              <div>
+                <div class="margin-down">
+                  <label for="id_present_Employer">Present Company Name</label>
+                 {{ form.present_Employer }}
+                </div>
+                <div class="divide two margin-down">
+                  <div class="df">
+                    <label for="id_present_Designation">Designation</label>
+                    {{ form.present_Designation }}
+                  </div>
+                  <div>
+                    <label for="id_present_Employer_join_year">Joining Year</label>
+                    {{ form.present_Employer_join_year }}
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="margin-down border-top">
+                  <label for="id_previous_Employer">Previous Company Name</label>
+                  {{ form.previous_Employer }}
+                </div>
+                <div class="divide two margin-down margin_bottom_two">
+                  <div class="df">
+                    <label for="id_previous_Designation">Designation</label>
+                    {{ form.previous_Designation }}
+                  </div>
+                  <div>
+                    <label for="id_previous_Employer_join_year">Joining Year</label>
+                    {{ form.previous_Employer_join_year }}
+                  </div>
+                </div>
+                <div id="spaceforAppend"></div>
+              </div>
+              <div class="margin-down">
+                  <label for="id_status"></label>
+                  {{form.status}}
+              </div>
+              <div class="left-float fx-crev-item">
+                  <input type="submit" class="button" value="Update">
+                     <a href="{% url 'view_alumni' alumni %}" class="button margin_right">View</a>
+              </div>
+        </form>
+    </div>
+<script type="text/javascript">
+        const dateinputbox = document.getElementById("id_birthdate");
+        function padZero(strNum) {
+            num = Number(strNum);
+            if (num < 10) {
+                strNum = '0' + strNum
+            }
+            return strNum;
+        }
+
+        datearr = new Date(dateinputbox.defaultValue).toLocaleDateString().slice(0,10)
+        if (datearr.includes('/')) {
+            datearr = datearr.split('/')
+        } else {
+            datearr = datearr.split('-')
+        }
+
+
+        a = `${padZero(datearr[2])}-${padZero(datearr[0])}-${padZero(datearr[1])}`;
+            dateinputbox.value = a;
+            console.log(a)
+</script>
+  </div>
+
+{% endblock %}

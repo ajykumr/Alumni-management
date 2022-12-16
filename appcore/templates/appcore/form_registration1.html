@@ -1,0 +1,117 @@
+{% extends 'appcore/headAndFoot.html' %}
+
+{% load static %}
+
+{% block content %}
+<style media="screen">
+    .just-between{
+            justify-content: space-between;
+    }
+
+    .delete_employment_row{
+        display:inline-block;
+    }
+    .delete_employment_row:hover{
+                background:red;
+    }
+</style>
+
+	<form class="" method="post" enctype="multipart/form-data" >
+	{% csrf_token %}
+
+
+    {{ Alumniform.as_p }}
+    {{ EmployerFormset.as_p }}
+    <div id="spaceforAppend"></div>
+    <div class="margin-down">
+     <a href="#" id="addNewFieldBtn" class="button">+ Add Another Employement</a>
+   </div>
+ <input type="submit" name="submit" class="button" value="Submit">
+
+<script type="text/javascript">
+    const countElement = document.getElementById('id_form-TOTAL_FORMS')
+    const intialCountElement = document.getElementById('id_form-INITIAL_FORMS')
+    const max = 1000;
+
+    const addNewFieldBtn  = document.getElementById("addNewFieldBtn");
+    const spaceforAppend  = document.getElementById("spaceforAppend");
+
+    addNewFieldBtn.addEventListener("click",addNewField)
+    spaceforAppend.addEventListener("click",removeField)
+
+    function addNewField(e) {
+      e.preventDefault();
+     const newfieldcount =  Number(intialCountElement.value) + Number(countElement.value) + 1;
+      if (countElement.value < 100) {
+      const EmployementTemplate = `
+      <div>
+          <div class="flexbox-one just-between red">
+               <label for="id_form-${newfieldcount}-Employer_name">Previous Company Name #${newfieldcount} :</label>
+              <span> <a  class="delete_employment_row" href="#" title="delete this row" class="red">  <img class="delete_row_icon" src="{% static 'images/delete_forever_black_24dp.svg' %}" alt=""> </a> </span>
+          </div>
+          <input type="text" name="form-${newfieldcount}-Employer_name" maxlength="100" id="id_form-${newfieldcount}-Employer_name">
+      </div>
+      <div class="divide two margin-down">
+          <div class="df">
+              <label for="id_form-${newfieldcount}-Employer_Designation">Designation :</label>
+              <input type="text" name="form-${newfieldcount}-Employer_Designation" maxlength="100" id="id_form-${newfieldcount}-Employer_Designation">
+          </div>
+          <div>
+              <label for="id_form-${newfieldcount}-Employer_join_year">Joining Year</label>
+              <input type="text" name="form-${newfieldcount}-Employer_join_year" maxlength="4" id="id_form-${newfieldcount}-Employer_join_year">
+          </div>
+      </div>`;
+
+    const div = document.createElement('div');
+    div.classList = "margin-down border-top extra_employement_row";
+    div.innerHTML = EmployementTemplate;
+    spaceforAppend.append(div)
+    countElement.value = newfieldcount;
+    }
+    }
+
+function removeField(e) {
+e.preventDefault();
+// const newfieldcount =  Number(intialCountElement.value) + Number(countElement.value) + 1;
+ if (countElement.value >= 1) {
+     if (e.target.tagName =="IMG" && e.target.className == "delete_row_icon") {
+         if (e.target.parentElement.parentElement.parentElement.parentElement.parentElement.classList.contains("extra_employement_row")) {
+            e.target.parentElement.parentElement.parentElement.parentElement.parentElement.remove()
+            countElement.value = countElement.value - 1
+         }
+     }
+     if (e.target.tagName =="a" && e.target.className == "delete_employment_row") {
+         if (e.target.parentElement.parentElement.parentElement.parentElement.classList.contains("extra_employement_row")) {
+            e.target.parentElement.parentElement.parentElement.parentElement.remove()
+            countElement.value = countElement.value - 1
+
+         }
+     }
+
+ }
+
+ const start = 2;
+
+ document.querySelectorAll('.extra_employement_row').forEach((item, i) => {
+    let count = start + i + 1;
+     item.querySelectorAll('label').forEach((item1, i) => {
+         const arr = item1.getAttribute('for').split("-")
+         const newline = arr[0] + '-' + count + '-' + arr[2]
+         if (item1.getAttribute('for').indexOf("Employer_name") != -1) {
+            item1.textContent  = "Previous Company Name #" + count + " :"
+         }
+        item1.setAttribute("for",newline)
+     });
+     item.querySelectorAll('input').forEach((item1, i) => {
+        const arr = item1.getAttribute('name').split("-")
+        const newline = arr[0] + '-' + count + '-' + arr[2];
+        item1.id = newline;
+        item1.setAttribute("name",newline)
+     });
+
+ });
+
+}
+
+</script>
+	{% endblock %}

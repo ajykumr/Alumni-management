@@ -1,0 +1,115 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{% static '/css/main.css' %}">
+  <link rel="stylesheet" href="{% static '/css/menumobilefinal.css' %}">
+  <link rel="stylesheet" href="{% static '/css/footer_new.css' %}">
+  <link rel="stylesheet" href="{% static '/css/forms_new.css' %}">
+  <title>{{title}}</title>
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i|Google+Sans:400,500,700|Material+Icons|Google+Sans+Display:400,500,700|Google+Sans+Text:400,500,700,400i,500i,700i" rel="stylesheet">
+</head>
+<body>
+  <div class="main-container">
+    <div class="notification-list"></div>
+    <div class="main-content">
+      <div class="dummyspace"></div>
+
+      <div id="headcont" class="headercontainer">
+      <header class="center">
+      <div class="logo-container">
+        <a href="/" title="Home page" rel="home"><img src="{% static 'images/logo_cut.png' %}" id="logo-img" alt="GECH"></a>
+      </div>
+      <input type="checkbox"id="menutoggler">
+      <div class="hamberger">
+      <div></div>
+      </div>
+      <div class="menu-list-container">
+        <nav class="menu-flex-container">
+        <ul class="menu-flex">
+          <li  class="menu-item"><a class="menu-links" href="#">News</a></li>
+          <li  class="menu-item" ><a  class="menu-links" href="#">About us</a></li>
+          <li  class="menu-item" ><a  class="menu-links" href="#">Alumni Achievers</a></li>
+          <li  class="menu-item" ><a  class="menu-links" href="{% url 'form' %}">Alumni Registration</a></li>
+          <li  class="menu-item" ><a  class="menu-links" href="{% url 'login' %}">Login</a></li>
+        </ul>
+      </nav>
+      </div>
+      </header>  </div>
+ <!-- header ends -->
+
+<!-- template contents starts -->
+
+{% block content %}
+{% endblock %}
+<!-- template contents ends -->
+
+<!-- footer starts -->
+
+<footer id="footerid">
+  <div class="both-foot center">
+    <!-- left bloc -->
+    <div class="left-foot">
+    <div class="foot-logo-container">
+    <a href="home.html" rel="home"><img class="footer-image" src="{% static 'images/logo_cut.png' %}" id="logo-img-foot" alt="GECH"></a>
+    </div>
+     <div class="social-foot">
+       <p class="foot-head">Follow Us</p>
+       <div class="link-list">
+        <a href="#"><span><img class="svgid"  width="24px" src="{% static 'images/linkedin-icon.svg' %}" alt=""></span></a>
+	<a href="#"><span><img class="svgid"  width="24px" src="{% static 'images/twitter-icon.svg' %}" alt=""></span></a>
+        <a href="#"><span><img class="svgid"  width="24px" src="{% static 'images/instagram-icon.svg' %}" alt=""></span></a>
+        <a href="#"><span><img class="svgid"  width="24px" src="{% static 'images/youtube-icon.svg' %}" alt=""></span></a>
+       </div>
+     </div>
+    </div>
+    <!-- right bloc -->
+    <div class="right-foot">
+      <ul class="right-links">
+        <li><p class="foot-head">About this website</p></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Report Error</a></li>
+        <li><a href="#">Sitemap</a></li>
+        <li><a href="#">DMCA Policy</a></li>
+        <li><a href="#">Privacy</a> & <a href="#">Terms</a></li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="foot-paw foot-flex">
+  <span>copyright &copy 2022 <span class="footersitename">gechassan.ac.in</span></span> <span>All rights reserved</span>
+  </div>
+
+</footer>
+
+<!-- footer ends here -->
+
+  </div>
+
+  <script>
+let prevScrollpos = window.pageYOffset;
+const nav  =  document.getElementById("headcont");
+window.onscroll = function() {
+let currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+          nav.classList.add("snap");
+          nav.classList.remove("scrolldown");
+    } else {
+          nav.classList.add("scrolldown");
+          nav.classList.remove("snap");
+    }
+    prevScrollpos = currentScrollPos;
+
+    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+  nav.style.boxShadow = "0 0.125rem 0.3125rem rgb(0 0 0 / 26%)";
+    } else {
+      nav.style.boxShadow = "none";
+    }
+}
+  </script>
+</body>
+</html>

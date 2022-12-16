@@ -1,0 +1,101 @@
+{% extends 'appcore/dashbar.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="right-panel">
+    <div class="">
+        <div class="rp-navbar">
+            <div class="dash_stats_head">
+                DASHBOARD
+            </div>
+            <div class="rp-navbar-item">
+                <a id="propic_btn" href="#">
+                    <img src="{% static 'images/profile.png' %}" class="dash-propic" alt="">
+                </a>
+                <div id="profile_details_dropdown" class="dropdown-menu-rp">
+                    <div>
+                        <ul>
+                            <li class="lm-list-item flex_icon"><img class="svg_icon" src="{% static 'images/face_black_24dp.svg' %}" alt="face_black_icon">{{userName}}</li>
+                            <li class="lm-list-item"><a id="dropdown-menu-account-btn" class="flex_icon" href="{% url 'accountView' %}"> <img class="svg_icon" src="{% static 'images/account-box-24px.svg' %}" alt="account-box-icon">Account</a></li>
+                            <li class="lm-list-item"><a id="dropdown-menu-logout-btn" class="flex_icon" href="#"> <img class="svg_icon" src="{% static 'images/logout_black_24dp.svg' %}" alt="logout_black_icon">Logout</a></li>
+                            <li class="lm-list-item"><a id="dropdown-menu-close-btn" class="flex_icon danger_color" href="#"> <img class="svg_icon" src="{% static 'images/cancel_black_24dp.svg' %}" alt="cancel_black_icon">close</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div>
+            <div class="margin_top center fl-bx fl-just">
+                <div class="bg_white max_content">
+                    <div class="big_stat">{{total_alumni}}</div>
+                    <div class="stat_label flex_icon"><img src="{% static 'images/how_to_reg_black_24dp.svg' %}" alt="cancel_black_icon">Registered</div>
+                </div>
+                <div class="bg_white max_content">
+                    <div class="big_stat">{{approved_alumni}}</div>
+                    <div class="stat_label flex_icon"><img src="{% static 'images/check_circle_outline_24px.svg' %}" alt="cancel_black_icon">Approved</div>
+                </div>
+                <div class="bg_white max_content">
+                    <div class="big_stat">{{pending_alumni}}</div>
+                    <div class="stat_label flex_icon"><img  src="{% static 'images/pending_actions_black_24dp.svg' %}" alt="cancel_black_icon">Pending</div>
+                </div>
+                <div class="bg_white max_content">
+                    <div class="big_stat">{{rejected_alumni}}</div>
+                    <div class="stat_label flex_icon"><img src="{% static 'images/highlight_off_black_24dp.svg' %}" alt="cancel_black_icon">Rejected</div>
+                </div>
+
+            </div>
+
+        <div class="margin_top center">
+            <div class="bg_white box_shadow">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>CS&E</th>
+                        <th>Civil</th>
+                        <th>E&C</th>
+                        <th>Mech</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tablerow in tablevaluess %}
+                    <tr>
+                        {% for tablerowitem in tablerow %}
+                        <td>{{tablerowitem}}</td>
+                        {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Total : {{total_alumni}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+            </div>
+        </div>
+        </div> <!-- ends -->
+<style media="screen">
+    thead th {
+      width:20% !important;
+    }
+</style>
+
+<script type="text/javascript">
+    const highlight_menu = document.getElementById('dash_bar_list_dashboard')
+            if (highlight_menu) {
+                highlight_menu.classList.add("lm-list-item-active")
+            }
+</script>
+
+
+</div>
+</div>
+{% endblock %}

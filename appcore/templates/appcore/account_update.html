@@ -1,0 +1,48 @@
+{% extends 'appcore/dashbar.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="right-panel pad_left_right">
+    <div class="right_panel_card_edit_alum">
+<div class="editpage_header">
+Profile Update
+</div>
+  <div class="editpage_head">
+  </div>
+
+        <form class="remove_form_style" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="margin-down">
+          <div class="margin-down">
+            <label for="id_name">Name</label>
+            {{form.name}}
+          </div>
+          <div class="margin-down">
+            <label for="id_name">Phone</label>
+            {{form.phone}}
+          </div>
+          <div class="margin-down">
+            <label for="id_name">Email</label>
+            {{form.email}}
+          </div>
+          <div class="margin-down">
+            <label for="id_name">Profile Photo</label>
+            {{form.profile_pic}}
+          </div>
+        </div>
+           <div class="left-float">
+                <a href="{% url 'accountView' %}" class="button " >Cancel</a>
+               <input type="submit" class="button margin_right" name="submit" value="Update">
+           </div>
+        </form>
+     </div>
+</div>
+<script type="text/javascript">
+    const highlight_menu = document.getElementById('dash_bar_list_profile')
+    if (highlight_menu) {
+        highlight_menu.classList.add("lm-list-item-active")
+    }
+</script>
+{% endblock %}

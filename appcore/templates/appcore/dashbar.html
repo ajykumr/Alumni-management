@@ -1,0 +1,120 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{% static '/css/main.css' %}">
+  <link rel="stylesheet" href="{% static '/css/menumobilefinal.css' %}">
+  <link rel="stylesheet" href="{% static '/css/footer_new.css' %}">
+  <link rel="stylesheet" href="{% static '/css/forms_new.css' %}">
+  <link rel="stylesheet" href="{% static '/css/dashboard.css' %}">
+    <title>{{title}}</title>
+  <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i|Google+Sans:400,500,700|Material+Icons|Google+Sans+Display:400,500,700|Google+Sans+Text:400,500,700,400i,500i,700i" rel="stylesheet">
+</head>
+
+<body>
+  <div class="main-container">
+    <div></div>
+
+    <div class="dash-container">
+      <div class="left-menu">
+        <div class="left-menu-container">
+          <div class="lm-ul">
+            <div class="lm-logo-list">
+              <img class="footer-image" src="{% static 'images/logo_cut.png' %}" alt="">
+            </div>
+            <ul>
+              <li ><a title="Dashboard" id="dash_bar_list_dashboard" class="lm-list-item flex_icon" href="{% url 'dashboard' %}"><img class="svg_icon" src="{% static 'images/dashboard_black_24dp.svg' %}" alt="cancel_black_icon">Dashboard</a></li>
+              <li ><a title="All Registered" id="dash_bar_list_all_registered" class="lm-list-item flex_icon" href="{% url 'dashboard_all' %}"><img class="svg_icon" src="{% static 'images/how_to_reg_black_24dp.svg' %}" alt="cancel_black_icon">All Registered</a></li>
+              <li ><a title="Approved" id="dash_bar_list_approved" class="lm-list-item flex_icon" href="{% url 'dashboard_approved' %}"><img class="svg_icon" src="{% static 'images/check_circle_outline_24px.svg' %}" alt="cancel_black_icon">Approved</a></li>
+              <li ><a title="Pending" id="dash_bar_list_pending" class="lm-list-item flex_icon" href="{% url 'dashboard_pending' %}"><img class="svg_icon" src="{% static 'images/pending_actions_black_24dp.svg' %}" alt="cancel_black_icon">Pending</a></li>
+              <li ><a title="Rejected" id="dash_bar_list_rejected" class="lm-list-item flex_icon" href="{% url 'dashboard_rejected' %}"><img class="svg_icon" src="{% static 'images/highlight_off_black_24dp.svg' %}" alt="cancel_black_icon">Rejected</a></li>
+            </ul>
+          </div>
+          <div class="lm-ul  lm-ul-down">
+            <ul>
+                <li ><a title="Website Home"  class="lm-list-item flex_icon" href="{% url 'home' %}"><img class="svg_icon" src="{% static 'images/public_black_24dp.svg' %}" alt="cancel_black_icon">Website Home</a></li>
+                <li ><a title="Documentation" id="dash_bar_list_documentation" class="lm-list-item flex_icon" href="{% url 'documentation' %}"><img class="svg_icon" src="{% static 'images/article_black_24dp.svg' %}" alt="cancel_black_icon">Documentation</a></li>
+                <li ><a title="Profile" id="dash_bar_list_profile" class="lm-list-item flex_icon" href="{% url 'accountView' %}"><img class="svg_icon" src="{% static 'images/account-box-24px.svg' %}" alt="cancel_black_icon">Profile</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+          <!-- right panel template area -->
+          {% block content %}
+          {% endblock %}
+          <!-- template ends -->
+      </div>
+    </div>
+
+
+    <div id="module_container" class="module_container">
+        <div class="module">
+            <div class="module_box bg_white box_shadow">
+                <div >
+                    <div class="module_head" class="fl-bx"><img class="svg_icon2" src="{% static 'images/warning_red_24dp.svg' %}" alt="cancel_black_icon">Logout</div>
+                    <div class="module_question">Are you sure?</div>
+                    <div class="fl-bx justi_ends">
+                        <a href="#" id="module_cancel_btn" class="button">Cancel</a>
+                        <a href="{% url 'logout' %}" id="module_procced_btn" class="button danger-back">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="module_container_two"  class="module_container">
+        <div class="module">
+            <div class="module_box bg_white box_shadow">
+                <div >
+                    <div class="module_head flex_center"><img class="svg_icon2" src="{% static 'images/warning_red_24dp.svg' %}" alt="cancel_black_icon">Bulk Update</div>
+                    <div class="module_question">
+                        <div class="">
+                            <div class="filter_box">
+                                <label for="bulk_update_module_select">Passing year</label>
+                                <select id="bulk_update_module_select" class="just_max_content">
+                                    <option value="" selected>---------</option>
+                                    <option value="firstname">First Name</option>
+                                    <option value="lastname">LastName</option>
+                                    <option value="phone">Phone #</option>
+                                    <option value="email">Email</option>
+                                    <option value="gender">Gender</option>
+                                    <option value="pass_year">Passing Year</option>
+                                    <option value="present_Employer">Present Employer</option>
+                                    <option value="present_Designation">Present Designation</option>
+                                    <option value="present_Employer_join_year">Present Employer Join Year</option>
+                                    <option value="previous_Employer">Previous Employer</option>
+                                    <option value="previous_Designation">Previous Designation</option>
+                                    <option value="previous_Employer_join_year">Previous Employer Join Year</option>
+                                </select>
+                            </div>
+                            <div class="filter_box margin_top">
+                                <label class="input_bulk_update_width" for="new_bulk_module_input">New Value</label>
+                                <input type="text"  id="new_bulk_module_input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fl-bx justi_ends">
+                        <a href="#" id="moduleTwo_cancel_btn" class="button">Cancel</a>
+                        <button type="submit" class="button" name="updateAlumniList" form="bulkActionForm" value="Submit">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="snackbar_container" class="snackbar_container">
+        <div class="snackbar">
+            <div id="snackbar_text">{% for message in messages %}<p>{{message}}</p>{% endfor %}</div>
+        </div>
+    </div>
+
+
+  <script src="{% static 'js/dashboard.js' %}"> </script>
+</body>
+
+</html>

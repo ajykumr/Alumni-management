@@ -1,0 +1,207 @@
+{% extends 'appcore/dashbar.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="right-panel">
+    <div class="">
+        <div class="rp-navbar">
+            <div class="searchbox-container">
+                <form class="remove_form_style_two" action="{% url 'dashboard_all' %}" id="search_catogery_form" method="post">
+                    {% csrf_token %}
+                    <div class="ser">
+                        <select class="ser-select" name="search_catogery">
+                            <option selected value="usn">USN</option>
+                            <option value="firstname">First Name</option>
+                            <option value="lastname">LastName</option>
+                            <option value="Phone">Phone #</option>
+                            <option value="email">Email</option>
+                            <option value="Company">Company</option>
+                        </select>
+                        <input type="search" class="serbar" name="search_word" placeholder="search...">
+                        <span>
+                            <button type="submit" class="serbtn btn_to_link" name="searchNormalWithCategory" form="search_catogery_form" value="Submit"><img class="" src="{% static 'images/search_black_24dp.svg' %}" alt="search_icon"></button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <div class="rp-navbar-item">
+                <a title="Account view" id="propic_btn" href="#">
+                    <img src="{% static 'images/profile.png' %}" class="dash-propic" alt="">
+                </a>
+                <div id="profile_details_dropdown" class="dropdown-menu-rp">
+                    <div>
+                        <ul>
+                            <li class="lm-list-item flex_icon"><img class="svg_icon" src="{% static 'images/face_black_24dp.svg' %}" alt="face_black_icon">{{userName}}</li>
+                            <li class="lm-list-item"><a title="Account" id="dropdown-menu-account-btn" class="flex_icon" href="{% url 'accountView' %}"> <img class="svg_icon" src="{% static 'images/account-box-24px.svg' %}"
+                                        alt="account-box-icon">Account</a></li>
+                            <li class="lm-list-item"><a title="Logout" id="dropdown-menu-logout-btn" class="flex_icon" href="#"> <img class="svg_icon" src="{% static 'images/logout_black_24dp.svg' %}" alt="logout_black_icon">Logout</a></li>
+                            <li class="lm-list-item"><a title="Close button" id="dropdown-menu-close-btn" class="flex_icon danger_color" href="#"> <img class="svg_icon" src="{% static 'images/cancel_black_24dp.svg' %}"
+                                        alt="cancel_black_icon">close</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg_white margin_top">
+            <form class="remove_form_style_two" action="{% url 'dashboard_all' %}" id="search_filter_form" method="post">
+                {% csrf_token %}
+                <div class="" id="filter_pad">
+                    <div class="fl-bx justi_ends">
+                        <div class="fl-bx align_item_center justi_ends">
+                            <div class="flex_icon">
+                                <img class="svg_icon" src="{% static 'images/filter_alt_black_24dp.svg' %}" alt="filter_alt_black_icon">Search filter
+                            </div>
+                        </div>
+                        <div class="fl-bx">
+                            <div class="filter_box">
+                                <label for="filter_pass_year">Passing year</label>
+                                <select id="filter_pass_year" class="just_max_content" name="pass_year">
+                                    <option value="" selected>---------</option>
+                                    <option value="2012">2012</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                </select>
+                            </div>
+                            <div class="filter_box">
+                                <label for="filter_branch">Branch</label>
+                                <select id="filter_branch" class="just_max_content" name="branch">
+                                    <option value="" selected>---------</option>
+                                    <option value="CS">CS&amp;E</option>
+                                    <option value="CV">CIVIL</option>
+                                    <option value="EC">E&amp;C</option>
+                                    <option value="ME">MECH</option>
+                                </select>
+                            </div>
+                            <div class="filter_box">
+                                <label for="filter_gender">Gender</label>
+                                <select id="filter_gender" class="just_max_content" name="gender">
+                                    <option value="" selected>---------</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Others">others</option>
+                                </select>
+                            </div>
+                            <div class="filter_box">
+                                <label for="filter_status">Status</label>
+                                <select id="filter_status" class="just_max_content" name="status">
+                                    <option value="" selected>---------</option>
+                                    <option value="Accepted">Accepted</option>
+                                    <option value="Rejected">Rejected</option>
+                                    <option value="Pending">Pending</option>
+                                </select>
+                            </div>
+                            <div class="filter_box">
+                                <input type="submit" class="button" value="Apply" name="filterSubmit">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="tablecontainer">
+            <form class="remove_form_style_two" id="bulkActionForm" action="{% url 'records' %}" method="post">
+                {% csrf_token %}
+                <div class="table-options">
+                    <div>
+                        <div class="aw-name">Alumni</div>
+                    </div>
+                    <div class="">
+                        <input type="search" placeholder="search table..." style="width: 23rem;" id="searchtable">
+                    </div>
+                    <div hidden>
+                        <input type="text" name="bulkUpdateCategory" hidden id="bulkUpdateCategoryName" disabled>
+                        <input type="text" name="bulkUpdateCategoryInput" hidden id="bulkUpdateCategoryValue" disabled>
+                    </div>
+                    <div class="fl-bx">
+                        <input type="submit" class="button" name="deleteAlumniList" value="Delete">
+                        <input type="submit" class="button" name="approveAlumniList" value="Approve">
+                        <input type="submit" class="button" name="rejectAlumniList" value="Reject">
+                        <a class="button" id="updateModuleOpenBtn" href="#">Update</a>
+                    </div>
+
+                </div>
+
+
+                <div class="tableC">
+                    <table>
+                        <thead>
+
+                            <tr>
+                                <th><input title="select all" id="select-all-checkbox" type="checkbox" class="select-check"> </th>
+                                <th>USN</th>
+                                <th>First Name</th>
+                                <th>Branch</th>
+                                <th>Pass year</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for alumni in page_obj %}
+                            <tr class="table-row-one">
+                                <td><input type="checkbox" name="selectedCheckBox" value="{{alumni.usn}}" class="select-check select_all_checkbox"> </td>
+                                <td>{{alumni.usn}}</td>
+                                <td>{{alumni.firstname}} {{alumni.lastname}}</td>
+                                <td>{{alumni.branch}}</td>
+                                <td>{{alumni.pass_year}}</td>
+                                <td><a data-uid="{{alumni.usn}}" class="table-row-action button" href="{% url 'view_alumni' alumni.usn %}">view</a></td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td></td>
+                                <td>
+
+                                    <img class="block-and-margin-auto" src="{% static 'images/no_search_results.webp' %}" alt="">
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div> <!-- ends -->
+
+    </div>
+    <!-- pagination starts-->
+    <div class="pagination center">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a class="button" href="?page=1">&laquo; first</a>
+            <a class="button" href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+            <a class="button" href="?page={{ page_obj.next_page_number }}">next</a>
+            <a class="button" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    <!-- pagination ends-->
+</div>
+
+<script type="text/javascript">
+    const highlight_menu = document.getElementById('{{highlight_menu}}')
+    if (highlight_menu) {
+        highlight_menu.classList.add("lm-list-item-active")
+    }
+    const filter_dict = {    {% for k,v in filter_dict.items %}{{ k }} : '{{v}}', {% endfor %}     }
+    for (const [key, value] of Object.entries(filter_dict)) { document.getElementById('filter_' + key).value = value;}
+</script>
+
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends 'appcore/headAndFoot.html' %}
+
+{% load static %}
+
+{% block content %}
+	<form class="" method="post" enctype="multipart/form-data" >
+	{% csrf_token %}
+      <div class="formheading heading">Alumni Registration</div>
+      <div class="margin-down danger_color">
+          {% if form.errors %}
+          {% for field in form %}
+
+               {% for error in field.errors %}
+                    {{field.label}}: {{ error|escape }}
+               {% endfor %}
+
+          {% endfor %}
+    {% endif %}
+      </div>
+
+	  <div class="margin-down">
+	  	<label for="id_profile_pic">
+	  		<span id="labelImage"></span>
+	  	</label>
+	  </div>
+	  <div class="margin-down">
+		  <label for="id_usn">University Registration Number</label>
+          {{ form.usn }}
+	  </div>
+   <div class="divide two margin-down">
+     <div class="df">
+       <label for="id_firstname">First Name</label>
+       {{ form.firstname }}
+     </div>
+     <div>
+       <label for="id_lastname">Last Name</label>
+       {{ form.lastname }}
+     </div>
+   </div>
+   <div class="divide two margin-down">
+     <div class="df">
+       <label for="id_phone">Phone</label>
+       {{ form.phone }}
+     </div>
+     <div>
+       <label for="id_email">Email</label>
+        {{ form.email }}
+     </div>
+   </div>
+   <div class="margin-down">
+   	<label for="id_profile_pic">Photo upload</label>
+	{{ form.profile_pic}}
+   </div>
+   <div class="divide three margin-down">
+     <div class="df">
+       <label for="id_gender">gender</label>
+        {{ form.gender }}
+     </div>
+     <div>
+       <label for="id_birthdate">Date of birth</label>
+        {{ form.birthdate }}
+     </div>
+     <div class="df">
+     <label class="rp-options-item" for="id_pass_year">Passing year</label>
+	{{ form.pass_year }}
+     </div>
+     <div class="df">
+       <label for="id_branch">Branch</label>
+		{{ form.branch }}
+     </div>
+   </div>
+      <!-- <div class="heading">Employement</div>
+      <div>
+        <div class="margin-down">
+          <label for="id_present_Employer">Present Company Name</label>
+         {{ form.present_Employer }}
+        </div>
+        <div class="divide two margin-down">
+          <div class="df">
+            <label for="id_present_Designation">Designation</label>
+            {{ form.present_Designation }}
+          </div>
+          <div>
+            <label for="id_present_Employer_join_year">Joining Year</label>
+            {{ form.present_Employer_join_year }}
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="margin-down border-top">
+          <label for="id_previous_Employer">Previous Company Name</label>
+          {{ form.previous_Employer }}
+        </div>
+        <div class="divide two margin-down">
+          <div class="df">
+            <label for="id_previous_Designation">Designation</label>
+            {{ form.previous_Designation }}
+          </div>
+          <div>
+            <label for="id_previous_Employer_join_year">Joining Year</label>
+            {{ form.previous_Employer_join_year }}
+          </div>
+        </div>
+        <div id="spaceforAppend"></div> -->
+      </div>
+        <div class="flexbox-one margin-down">
+             <input id="t-and-c-agree" required class="checkbox" type="checkbox" tabindex="0">
+             <label class="check-label" for="t-and-c-agree" >I agree to the Terms and Conditions</label>
+           </div>
+      <div class="left-float">
+		  <input type="submit" name="submit" class="button" value="Submit">
+      </div>
+
+    </form>
+
+<script type="text/javascript">
+
+	document.getElementById("id_usn").placeholder = "USN"
+	document.getElementById("id_firstname").placeholder = "First Name"
+	document.getElementById("id_lastname").placeholder = "Last Name"
+	document.getElementById("id_phone").placeholder = "Phone Number"
+	document.getElementById("id_email").placeholder = "Email"
+	document.getElementById("id_birthdate").placeholder = "Date of Birth"
+	document.getElementById("id_present_Employer").placeholder = "Present Employer"
+	document.getElementById("id_present_Designation").placeholder = "Designation"
+	document.getElementById("id_present_Employer_join_year").placeholder = "Join Year ex. 2021"
+	document.getElementById("id_previous_Employer").placeholder = "Previous Employer"
+	document.getElementById("id_previous_Designation").placeholder = "Designation"
+	document.getElementById("id_previous_Employer_join_year").placeholder = "Join Year ex. 2021"
+
+	const propicinput = document.getElementById("id_profile_pic")
+	const labelImage = document.getElementById("labelImage")
+
+	id_profile_pic.addEventListener("change", handlefor)
+
+	function handlefor(e) {
+	      const img = document.createElement("img");
+	      console.log(this.files);
+	      img.src = URL.createObjectURL(this.files[0]);
+	      img.className = 'imagestyle';
+	      img.onload = function() {
+	        URL.revokeObjectURL(this.src);
+	      }
+	      labelImage.appendChild(img);
+	}
+
+</script>
+
+
+	{% endblock %}

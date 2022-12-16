@@ -1,0 +1,42 @@
+{% extends 'appcore/dashbar.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="right-panel pad_left_right">
+    <div class="right_panel_card_edit_alum">
+<div class="editpage_header">
+Profile
+</div>
+  <div class="row-pro-pic-and-name">
+            <div class="row-pro-pic-and-name"> <div>
+               <img class="propic-mod" src="{{ staffAccount.profile_pic.url }}" alt="{{alumni.firstname}} photo">
+             </div>
+             <div class="detail-modal">
+               <div>NAME : <span id="span-id-full-name">{{staffAccount.name}}</span></div>
+               <div>PHONE # : <span id="span-id-phone">{{staffAccount.phone}}</span> </div>
+               <div>EMAIL : <a href="mailto:{{staffAccount.email}}"><span id="span-id-email">{{staffAccount.email}}</span></a><p></p>  </div>
+             </div>  </div>
+
+
+           <div class="fx-crev">
+             <div>
+               <div class="fx-crev-item">
+                 <a href="{% url 'accountUpdate' %}" class="button">Update</a>
+               </div>
+             </div>
+           </div>
+          </div>
+          </div>
+    <div class="margin_top bg_white box_shadow">
+        <a class="flex_icon danger_color" id="dropdown-menu-logout-btn" href="{% url 'logout' %}"><img class="svg_icon" src="{% static 'images/logout_black_24dp.svg' %}" alt="cancel_black_icon"> Logout</a>
+    </div>
+</div>
+<script type="text/javascript">
+    const highlight_menu = document.getElementById('dash_bar_list_profile')
+    if (highlight_menu) {
+        highlight_menu.classList.add("lm-list-item-active")
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'appcore/headAndFoot.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="hero-container">
+    <div class="hero center">
+        <div class="large-heading-inline">
+            Account Created Successfully
+        </div>
+        <div class="less-large-heading-inline">
+            please contact admin for activation
+        </div>
+    </div>
+</div> <!-- hero container -->
+
+<style media="screen">
+    .large-heading-inline {
+        text-align: center;
+        font-size: 3rem;
+        font-weight: 700;
+        margin-top: 8rem;
+    }
+
+    .less-large-heading-inline {
+        text-align: center;
+        font-size: 2rem;
+        color: red;
+        margin-bottom: 7rem;
+    }
+
+    @media only screen and (max-width:500px) {
+        .large-heading-inline {
+            font-size: 2rem;
+        }
+
+        .less-large-heading-inline {
+            font-size: 1.3rem;
+        }
+    }
+</style>
+
+{% endblock %}
