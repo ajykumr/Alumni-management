@@ -4,7 +4,7 @@
 college database project
 
 snapshots
-![alt text](https://github.com/ajykumr/Alumni-management/blob/main/snapshots/Home.png)
+![alt text](https://github.com/ajykumr/Alumni-management/blob/main/snapshots/Home-thumb.png)
 
 
 
