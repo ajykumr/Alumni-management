@@ -44,4 +44,4 @@ class StaffAccountForm(ModelForm):
         exclude = ['user']
 
 
-EmployerFormset = formset_factory(EmployerForm ,extra=2)
+EmployerFormset = formset_factory(EmployerForm ,extra=1)

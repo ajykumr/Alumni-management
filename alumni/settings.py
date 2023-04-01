@@ -75,14 +75,11 @@ WSGI_APPLICATION = 'alumni.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'alumnidata2',
-            'USER': 'root',
-            'PASSWORD': 'admin',
-            'HOST': '127.0.0.1',
-            'PORT': '3306',
-        }
+'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase', # This is where you put the name of the db file. 
+                 # If one doesn't exist, it will be created at migration time.
+    }
 }
 
 

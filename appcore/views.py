@@ -38,38 +38,23 @@ def account_success(request):
 
 
 class BookListView(generic.ListView):
-
     model = Alumni
     context_object_name = 'Alumnis'
-    # print(context)
     print(context_object_name)
     template_name = 'appcore/a.html'
 
-def registerform(request):
-    if request.method == 'POST':
-            form = AlumniForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.save()
-                print("valid")
-                # return redirect('/success')
-    else:
-        form = AlumniForm()
-    context = {'form': form,'title':"Alumni Registration - Alumni"}
-    return render(request, 'appcore/form_registration.html', context)
 
-def registerform1(request):
+def registerform(request):
     if request.method == 'POST':
         alumniForm = AlumniForm(request.POST, request.FILES)
         employerFormset = EmployerFormset(request.POST)
         if alumniForm.is_valid() and employerFormset.is_valid():
-            # first save this book, as its reference will be used in `Author`
             alumni = alumniForm.save()
             for form in employerFormset:
-                # so that `book` instance can be attached.
                 employer = form.save(commit=False)
                 employer.alumni = alumni
                 employer.save()
-            # return redirect('app:book_list')
+                return redirect('/success')
     alumniForm = AlumniForm()
     employerFormset = EmployerFormset()
     context = {'Alumniform': alumniForm,'EmployerFormset': employerFormset,'title':"Alumni Registration - Alumni"}
@@ -89,6 +74,25 @@ def logoutUser(request):
 
 @unauthenticated_user
 def signin_page(request):
+    form =  CreateStaffForm()
+    if request.method == 'POST':
+        form = CreateStaffForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # user.is_active = False
+            user.save()
+            group = Group.objects.get(name='staff')
+            user.groups.add(group)
+            StaffAccount.objects.create(
+                user=user,
+                name=user.username,
+                 )
+            return redirect('account_success')
+    context = {'form' : form,'title':"Sign in - Alumni"}
+    return render(request, 'appcore/form_signin.html', context)
+    
+@unauthenticated_user
+def staff_signin_page(request):
     form =  CreateStaffForm()
     if request.method == 'POST':
         form = CreateStaffForm(request.POST)
@@ -134,7 +138,7 @@ def dashboard(request):
     pending_alumni = alumni.filter(status='Pending').count()
 
     branches = ['CS', 'CV', 'EC', 'ME']
-    years = [2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+    years = [2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022,2023]
     # years = alumni.values_list('pass_year', flat=True).distinct().order_by('pass_year')
     tablevaluess = []
 
@@ -151,6 +155,8 @@ def dashboard(request):
 
 
     userName = request.user
+    staffAccount = StaffAccount.objects.get(user=request.user.id)
+    print(staffAccount.name)
 
     context = {'total_alumni':total_alumni, 'approved_alumni':approved_alumni,
     'rejected_alumni':rejected_alumni,'pending_alumni':pending_alumni,'title':"Dashboard - Alumni", 'userName':userName, 'tablevaluess' : tablevaluess}
@@ -191,7 +197,6 @@ def dashboard_all(request):
 
 @login_required(login_url='login')
 def dashboard_approved(request):
-
     alumni = Alumni.objects.filter(status="Accepted").order_by('usn')
     paginator = Paginator(alumni, 60) # Show 25 contacts per page.
     page_number = request.GET.get('page')
@@ -241,14 +246,7 @@ def update_alumni(request, pk):
 @login_required(login_url='login')
 def view_alumni(request, pk):
     alumni =  Alumni.objects.get(usn=pk)
-    employers = Employer.objects.filter(alumni_id=usn).order_by(Employer_join_year)
-    return render(request, 'appcore/alumni_view.html', {'alumni':alumni,'title':"View Alumni - Alumni"})
-
-@login_required(login_url='login')
-def view_alumni1(request, pk):
-    alumni =  Alumni.objects.get(usn=pk)
     print(alumni)
-    # employers = Employer.objects.filter(alumni_id=usn).order_by(Employer_join_year)
     employers = Employer.objects.filter(alumni_id=alumni.usn).order_by("Employer_join_year")
     print(employers)
     for employ in employers:
@@ -263,6 +261,12 @@ def view_alumni1(request, pk):
 
 @login_required(login_url='login')
 def accountview(request):
+    staffAccount = StaffAccount.objects.get(user=request.user.id)
+    context = {'staffAccount':staffAccount, 'title':"Account - Alumni"}
+    return render(request, 'appcore/account_view.html', context)
+    
+@login_required(login_url='login')
+def studentview(request):
     staffAccount = StaffAccount.objects.get(user=request.user.id)
     context = {'staffAccount':staffAccount, 'title':"Account - Alumni"}
     return render(request, 'appcore/account_view.html', context)

@@ -14,21 +14,140 @@
     .delete_employment_row:hover{
                 background:red;
     }
+    .rightflex{
+display:flex;
+flex-direction:row-reverse;
+    }
 </style>
 
 	<form class="" method="post" enctype="multipart/form-data" >
 	{% csrf_token %}
+      <div class="formheading heading">Alumni Registration</div>
+      <div class="margin-down danger_color">
+          {% if form.errors %}
+          {% for field in form %}
 
+               {% for error in field.errors %}
+                    {{field.label}}: {{ error|escape }}
+               {% endfor %}
 
-    {{ Alumniform.as_p }}
-    {{ EmployerFormset.as_p }}
+          {% endfor %}
+    {% endif %}
+      </div>
+
+	  <div class="margin-down">
+	  	<label for="id_profile_pic">
+	  		<span id="labelImage"></span>
+	  	</label>
+	  </div>
+ <div class="margin-down">
+		  <label for="id_usn">University Registration Number</label>
+          {{ Alumniform.usn }}
+	  </div>
+   <div class="divide two margin-down">
+     <div class="df">
+       <label for="id_firstname">First Name</label>
+       {{ Alumniform.firstname }}
+     </div>
+     <div>
+       <label for="id_lastname">Last Name</label>
+       {{ Alumniform.lastname }}
+     </div>
+   </div>
+   <div class="divide two margin-down">
+     <div class="df">
+       <label for="id_phone">Phone</label>
+       {{ Alumniform.phone }}
+     </div>
+     <div>
+       <label for="id_email">Email</label>
+        {{ Alumniform.email }}
+     </div>
+   </div>
+   <div class="margin-down">
+   	<label for="id_profile_pic">Photo upload</label>
+	{{ Alumniform.profile_pic}}
+   </div>
+   <div class="divide three margin-down">
+     <div class="df">
+       <label for="id_gender">gender</label>
+        {{ Alumniform.gender }}
+     </div>
+     <div>
+       <label for="id_birthdate">Date of birth</label>
+        {{ Alumniform.birthdate }}
+     </div>
+     <div class="df">
+     <label class="rp-options-item" for="id_pass_year">Passing year</label>
+	{{ Alumniform.pass_year }}
+     </div>
+     <div class="df">
+       <label for="id_branch">Branch</label>
+		{{ Alumniform.branch }}
+     </div>
+   </div>
+     <input type="hidden" name="form-TOTAL_FORMS" value="1" id="id_form-TOTAL_FORMS">
+     <input type="hidden" name="form-INITIAL_FORMS" value="0" id="id_form-INITIAL_FORMS">
+     <input type="hidden" name="form-MIN_NUM_FORMS" value="0" id="id_form-MIN_NUM_FORMS">
+     <input type="hidden" name="form-MAX_NUM_FORMS" value="1000" id="id_form-MAX_NUM_FORMS">
+     
+     <div class="margin-down">
+     <label for="id_form-0-Employer_name">Present Employer name:</label>   
+    <input type="text" name="form-0-Employer_name" maxlength="100" id="id_form-0-Employer_name">
+</div>
+  <div class="divide two margin-down">
+  <div  class="margin-down"> 
+      <label for="id_form-0-Employer_Designation">Present Designation:</label>
+   <input type="text" name="form-0-Employer_Designation" maxlength="100" id="id_form-0-Employer_Designation">
+</div>
+     <div class="margin-down">
+  <label for="id_form-0-Employer_join_year">join year:</label>
+<input type="text" name="form-0-Employer_join_year" maxlength="4" id="id_form-0-Employer_join_year">   
+</div>
+</div>
     <div id="spaceforAppend"></div>
     <div class="margin-down">
      <a href="#" id="addNewFieldBtn" class="button">+ Add Another Employement</a>
    </div>
+   <div class="flexbox-one margin-down">
+             <input id="t-and-c-agree" required class="checkbox" type="checkbox" tabindex="0">
+             <label class="check-label" for="t-and-c-agree" >I agree to the Terms and Conditions</label>
+           </div>
+   <div class="rightflex">
  <input type="submit" name="submit" class="button" value="Submit">
+   </div>
 
 <script type="text/javascript">
+
+
+	document.getElementById("id_usn").placeholder = "USN"
+	document.getElementById("id_firstname").placeholder = "First Name"
+	document.getElementById("id_lastname").placeholder = "Last Name"
+	document.getElementById("id_phone").placeholder = "Phone Number"
+	document.getElementById("id_email").placeholder = "Email"
+	document.getElementById("id_birthdate").placeholder = "Date of Birth"
+	document.getElementById("id_form-0-Employer_name").placeholder = "Present Employer"
+	document.getElementById("id_form-0-Employer_Designation").placeholder = "Designation"
+	document.getElementById("id_form-0-Employer_join_year").placeholder = "Join Year ex. 2021"
+
+	const propicinput = document.getElementById("id_profile_pic")
+	const labelImage = document.getElementById("labelImage")
+
+	id_profile_pic.addEventListener("change", handlefor)
+
+	function handlefor(e) {
+	      const img = document.createElement("img");
+	      console.log(this.files);
+	      img.src = URL.createObjectURL(this.files[0]);
+	      img.className = 'imagestyle';
+	      img.onload = function() {
+	        URL.revokeObjectURL(this.src);
+	      }
+	      labelImage.appendChild(img);
+	}
+
+
+
     const countElement = document.getElementById('id_form-TOTAL_FORMS')
     const intialCountElement = document.getElementById('id_form-INITIAL_FORMS')
     const max = 1000;
@@ -44,8 +163,8 @@
      const newfieldcount =  Number(intialCountElement.value) + Number(countElement.value) + 1;
       if (countElement.value < 100) {
       const EmployementTemplate = `
-      <div>
-          <div class="flexbox-one just-between red">
+      <div class="margin-down">
+          <div class="flexbox-one just-between red ">
                <label for="id_form-${newfieldcount}-Employer_name">Previous Company Name #${newfieldcount} :</label>
               <span> <a  class="delete_employment_row" href="#" title="delete this row" class="red">  <img class="delete_row_icon" src="{% static 'images/delete_forever_black_24dp.svg' %}" alt=""> </a> </span>
           </div>
@@ -63,7 +182,7 @@
       </div>`;
 
     const div = document.createElement('div');
-    div.classList = "margin-down border-top extra_employement_row";
+    div.classList = "extra_employement_row";
     div.innerHTML = EmployementTemplate;
     spaceforAppend.append(div)
     countElement.value = newfieldcount;
