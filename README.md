@@ -2,7 +2,7 @@
 Using django framework
 
 college database project
-live @ [http://gechalumni.in](gechalumni.in)
+live @ [gechalumni.in](http://gechalumni.in)
 
 [snapshots are here!](https://github.com/ajykumr/Alumni-management/blob/main/snapshots)
 
